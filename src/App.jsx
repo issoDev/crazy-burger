@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react"
 
 function App() {
-  const [count, setCount] = useState(0)
+  // state(état, données)
+  //un state provoque une réactualisation automatique de l'affichage
+  const [inputValue, setInputValue] = useState("");
+  
 
+  // comportements
+  const inputValueUpdated= (e) => {
+    const valueAfterChange = e.target.value;
+    setInputValue(valueAfterChange.trim())
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputValue) {
+      alert(`Bonjour ${inputValue}`)
+    }
+    setInputValue("")
+  }
+
+  // affichage(une fois le state modifié, l'actualisation de l'affichage se automatiquement)
   return (
-    <>
+    <div>
+      <h2>Bienvenue chez nous</h2>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h3>Connectez-vous</h3>
+          <form action="submit" onSubmit={handleSubmit}>
+            <input 
+            type="text" 
+            placeholder="Entrez votre prénom..."
+            value={inputValue}
+            onChange={inputValueUpdated}
+            required
+          />
+          <button type="submit">Accédez à votre espace</button>
+        </form>
       </div>
-      <h1>Salut Issife</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      
+    </div>
+  ) 
 }
+
+
 
 export default App
